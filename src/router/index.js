@@ -92,6 +92,13 @@ const router = new VueRouter({
         ],
       },
   },
+
+{
+    path: 'GameOnlyAdmin/',      
+    name: 'GameOnlyAdmin',     
+    component: () => import('@/views/GameOnlyAdmin.vue'), 
+    },
+
   {
       path: '/Submit-product',
       name: 'Submit-product',
