@@ -133,65 +133,65 @@
       </div>
     </div>
 
-    <div id="print-isolation-layer" class="print-only">
-      <h1 class="text-center font-weight-bold mb-4">ใบสั่งผลิตชิ้นส่วน (Production Order)</h1>
-      <div class="print-header-info border-bottom pb-2 mb-3" style="position: relative;">
-        <div class="d-flex justify-content-between">
-          <div>
-            <p><strong>Project Order:</strong> {{ selectedPlan ? selectedPlan.po : '-' }}</p>
-            <p><strong>SAP Code:</strong> {{ selectedPlan ? selectedPlan.sap : '-' }}</p>
-            <p><strong>รายการ:</strong> {{ selectedPlan ? selectedPlan.name : '-' }}</p>
+    <div id="print-content" class="d-none">
+      <div style="font-family: 'Sarabun', sans-serif; color: black; padding: 20px;">
+        <h1 style="text-align: center; font-weight: bold; margin-bottom: 20px;">ใบสั่งผลิตชิ้นส่วน (Production Order)</h1>
+        
+        <div style="display: flex; justify-content: space-between; border-bottom: 2px solid #ccc; padding-bottom: 10px; margin-bottom: 15px;">
+          <div style="font-size: 14px;">
+            <p style="margin: 2px 0;"><strong>Project Order:</strong> {{ selectedPlan ? selectedPlan.po : '-' }}</p>
+            <p style="margin: 2px 0;"><strong>SAP Code:</strong> {{ selectedPlan ? selectedPlan.sap : '-' }}</p>
+            <p style="margin: 2px 0;"><strong>รายการ:</strong> {{ selectedPlan ? selectedPlan.name : '-' }}</p>
           </div>
-          <div class="text-right">
-            <p><strong>วันที่สั่งผลิต:</strong> {{ new Date().toLocaleDateString('th-TH') }}</p>
-            <p><strong>สี (Color):</strong> {{ selectedPlan ? selectedPlan.color : '-' }}</p>
+          <div style="text-align: right; font-size: 14px;">
+            <p style="margin: 2px 0; font-size: 1.4rem; font-weight: bold;">เป้าหมายวันนี้: {{ dailyTarget.toLocaleString() }} ตัว</p>
+            <p style="margin: 2px 0;"><strong>วันที่สั่งผลิต:</strong> {{ new Date().toLocaleDateString('th-TH') }}</p>
+            <p style="margin: 2px 0;"><strong>สี (Color):</strong> {{ selectedPlan ? selectedPlan.color : '-' }}</p>
           </div>
         </div>
-        <p style="position: absolute; top: 0; right: 0; font-size: 1.4rem; font-weight: bold;">เป้าหมายวันนี้: {{ dailyTarget.toLocaleString() }} ตัว</p>
-      </div>
-      <table class="table-print mb-5">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>รหัสชิ้นส่วน</th>
-            <th style="width: 35%">รายการชิ้นส่วน</th>
-            <th>ต่อตัว</th>
-            <th>ต้องใช้</th>
-            <th>สต็อก</th>
-            <th>ผลิตเพิ่ม</th>
-            <th>หมายเหตุ</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(row, index) in tableData" :key="index">
-            <td class="text-center">{{ index + 1 }}</td>
-            <td class="text-center font-weight-bold">{{ row.partCode }}</td>
-            <td class="pl-2">{{ row.itemName }}</td>
-            <td class="text-center">{{ row.perUnit }}</td>
-            <td class="text-center font-weight-bold">{{ row.totalNeed.toLocaleString() }}</td>
-            <td class="text-center">{{ row.stock.toLocaleString() }}</td>
-            <td class="text-center font-weight-bold" style="font-size: 1.1rem;">{{ row.toProduce.toLocaleString() }}</td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
 
-      <div class="print-footer mt-5">
-        <div class="d-flex justify-content-between text-center">
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 40px;">
+          <thead>
+            <tr>
+              <th style="border: 1px solid black; padding: 8px; text-align: center; background-color: #f2f2f2;">#</th>
+              <th style="border: 1px solid black; padding: 8px; text-align: center; background-color: #f2f2f2;">รหัสชิ้นส่วน</th>
+              <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #f2f2f2; width: 35%;">รายการชิ้นส่วน</th>
+              <th style="border: 1px solid black; padding: 8px; text-align: center; background-color: #f2f2f2;">ต่อตัว</th>
+              <th style="border: 1px solid black; padding: 8px; text-align: center; background-color: #f2f2f2;">ต้องใช้</th>
+              <th style="border: 1px solid black; padding: 8px; text-align: center; background-color: #f2f2f2;">สต็อก</th>
+              <th style="border: 1px solid black; padding: 8px; text-align: center; background-color: #f2f2f2;">ผลิตเพิ่ม</th>
+              <th style="border: 1px solid black; padding: 8px; text-align: center; background-color: #f2f2f2;">หมายเหตุ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(row, index) in tableData" :key="index">
+              <td style="border: 1px solid black; padding: 6px; text-align: center;">{{ index + 1 }}</td>
+              <td style="border: 1px solid black; padding: 6px; text-align: center; font-weight: bold;">{{ row.partCode }}</td>
+              <td style="border: 1px solid black; padding: 6px; text-align: left;">{{ row.itemName }}</td>
+              <td style="border: 1px solid black; padding: 6px; text-align: center;">{{ row.perUnit }}</td>
+              <td style="border: 1px solid black; padding: 6px; text-align: center; font-weight: bold;">{{ row.totalNeed.toLocaleString() }}</td>
+              <td style="border: 1px solid black; padding: 6px; text-align: center;">{{ row.stock.toLocaleString() }}</td>
+              <td style="border: 1px solid black; padding: 6px; text-align: center; font-weight: bold; font-size: 1.1rem;">{{ row.toProduce.toLocaleString() }}</td>
+              <td style="border: 1px solid black; padding: 6px; text-align: center;"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="display: flex; justify-content: space-between; text-align: center; margin-top: 50px;">
           <div style="width: 30%;">
-            <p>__________________________</p>
-            <p>ผู้ออกเอกสาร</p>
-            <p>วันที่: ___/___/___</p>
+            <p style="margin: 5px 0;">__________________________</p>
+            <p style="margin: 5px 0;">ผู้ออกเอกสาร</p>
+            <p style="margin: 5px 0;">วันที่: ___/___/___</p>
           </div>
           <div style="width: 30%;">
-            <p>__________________________</p>
-            <p><strong>ฝ่ายผลิต (ผู้รับงาน)</strong></p>
-            <p>วันที่: ___/___/___</p>
+            <p style="margin: 5px 0;">__________________________</p>
+            <p style="margin: 5px 0;"><strong>ฝ่ายผลิต (ผู้รับงาน)</strong></p>
+            <p style="margin: 5px 0;">วันที่: ___/___/___</p>
           </div>
           <div style="width: 30%;">
-            <p>__________________________</p>
-            <p>ผู้ตรวจสอบ / QC</p>
-            <p>วันที่: ___/___/___</p>
+            <p style="margin: 5px 0;">__________________________</p>
+            <p style="margin: 5px 0;">ผู้ตรวจสอบ / QC</p>
+            <p style="margin: 5px 0;">วันที่: ___/___/___</p>
           </div>
         </div>
       </div>
@@ -287,7 +287,23 @@ export default {
     },
     clearSelection() { this.selectedPlan = null; this.tableData = []; this.totalPoQty = 0; this.dailyTarget = 0; },
     customFilter: (options, search) => options.filter(o => o.display.toLowerCase().includes(search.toLowerCase())).slice(0, 50),
-    printOrder() { window.print() }
+    
+    // ฟังก์ชัน Print แบบใหม่: สร้างหน้าต่างจำลองขึ้นมาพิมพ์เฉพาะเนื้อหา
+    printOrder() {
+      const printContents = document.getElementById('print-content').innerHTML;
+      const originalContents = document.body.innerHTML;
+
+      // สลับเอาเนื้อหาใน body ออกแล้วใส่เฉพาะตาราง
+      document.body.innerHTML = printContents;
+      
+      // สั่งพิมพ์
+      window.print();
+      
+      // คืนค่าหน้าเว็บเดิมกลับมา
+      document.body.innerHTML = originalContents;
+      // รีโหลดเพื่อป้องกัน Event Vue หลุด
+      window.location.reload();
+    }
   }
 }
 </script>
@@ -317,57 +333,5 @@ export default {
 .pagination-purple { ::v-deep .page-item.active .page-link { background-color: #7367f0 !important; border-color: #7367f0 !important; } ::v-deep .page-link { color: #6e6b7b; border: none; background: #f3f2f7; margin: 0 3px; border-radius: 6px; } }
 .table-bom { width: 100%; border-collapse: collapse; th, td { border: 1px solid #dae1e7; padding: 10px 8px; vertical-align: middle; font-size: 0.85rem; } th { background-color: #5d5fef; color: white; text-align: center; } .bg-orange-light { background-color: rgba(255, 159, 67, 0.1); } .text-orange { color: #ff9f43; font-weight: bold; } }
 
-.print-only { display: none; }
-
-@media print {
-  /* บังคับซ่อนทุกอย่างยกเว้นส่วนที่ต้องการพิมพ์ */
-  @page {
-    margin: 1cm;
-    size: A4;
-  }
-
-  html, body {
-    width: 210mm;
-    height: 297mm;
-  }
-
-  /* ซ่อนทุกอย่างในหน้าเว็บ */
-  body > *:not(#app),
-  #app > *:not(.card),
-  .card > *:not(#print-isolation-layer),
-  nav, header, footer, aside, .sidebar, .menu, 
-  [class*="sidebar"], [class*="menu"], [class*="nav"] {
-    display: none !important;
-    visibility: hidden !important;
-  }
-
-  .no-print { 
-    display: none !important; 
-    visibility: hidden !important;
-  }
-  
-  .print-only { 
-    display: block !important; 
-    visibility: visible !important;
-  }
-
-  #print-isolation-layer {
-    display: block !important;
-    visibility: visible !important;
-    position: relative !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  
-  .table-print { 
-    width: 100%; 
-    border-collapse: collapse; 
-    th, td { 
-      border: 1px solid black !important; 
-      padding: 5px; 
-      font-size: 10pt; 
-    } 
-  }
-}
+.d-none { display: none; }
 </style>
